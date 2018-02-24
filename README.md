@@ -1,4 +1,4 @@
-# Easy Krypto
+# Easy Krypto [![Build Status](https://travis-ci.org/phxql/easy-krypto.svg?branch=master)](https://travis-ci.org/phxql/easy-krypto)
 
 This Kotlin library aims to provide a simple way to encrypt and decrypt stuff in a secure manner.
 
