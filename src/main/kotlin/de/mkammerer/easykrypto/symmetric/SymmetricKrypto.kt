@@ -7,14 +7,9 @@ import java.io.InputStream
  */
 interface SymmetricKrypto {
     /**
-     * Creates a randomly generated key.
+     * Creates a randomly generated key, optionally with the given [length in bits][lengthInBits].
      */
-    fun createKey(): Key
-
-    /**
-     * Creates a randomly generated key with the given [size in bits][lengthInBits].
-     */
-    fun createKeyWithSize(lengthInBits: Int): Key
+    fun createRandomKey(lengthInBits: Int = -1): Key
 
     /**
      * Creates a plaintext from the given [byte array][plaintext].

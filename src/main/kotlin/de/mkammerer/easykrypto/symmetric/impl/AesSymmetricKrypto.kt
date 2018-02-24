@@ -12,7 +12,7 @@ import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 object AesSymmetricKrypto : SymmetricKrypto {
-    private const val DEFAULT_KEY_SIZE_IN_BITS = 256
+    private const val DEFAULT_KEY_SIZE_IN_BITS = 128
     private const val NONCE_LENGTH_IN_BITS = 128
 
     private val secureRandom = SecureRandom()
@@ -21,10 +21,10 @@ object AesSymmetricKrypto : SymmetricKrypto {
 
     override fun createPlaintextFromString(plaintext: String): Plaintext = BytesPlaintext(plaintext.toByteArray())
 
-    override fun createKey(): Key = createKeyWithSize(DEFAULT_KEY_SIZE_IN_BITS)
+    override fun createRandomKey(lengthInBits: Int): Key {
+        val length = if (lengthInBits == -1) DEFAULT_KEY_SIZE_IN_BITS else lengthInBits
 
-    override fun createKeyWithSize(lengthInBits: Int): Key {
-        val bytes = randomBytes(lengthInBits / 8)
+        val bytes = randomBytes(length / 8)
         return KeyImpl(bytes)
     }
 
