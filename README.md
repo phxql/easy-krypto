@@ -1,6 +1,6 @@
 # Easy Krypto
 
-This library aims to provide a simple way to encrypt and decrypt stuff in a secure manner.
+This Kotlin library aims to provide a simple way to encrypt and decrypt stuff in a secure manner.
 
 ## Building
 
