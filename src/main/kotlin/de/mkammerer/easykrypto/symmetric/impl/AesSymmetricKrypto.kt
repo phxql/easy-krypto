@@ -63,7 +63,7 @@ object AesSymmetricKrypto : SymmetricKrypto {
 
         val gcmSpec = GCMParameterSpec(NONCE_LENGTH_IN_BITS, ciphertext.nonce)
 
-        // Put the cipher in encrypt mode
+        // Put the cipher in decrypt mode
         cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmSpec)
 
         val plaintextBytes = cipher.doFinal(ciphertext.ciphertext)
