@@ -3,7 +3,7 @@
 ## Encrypt something with a password
 
 To encrypt or decrypt something with a password, the password needs to be converted to a key. To make that process secure,
-a salt is needed. You can generate a random one and store that somewhere. The salt doesn't need to be private, everyone
+a salt is needed. You can generate a random salt and store that somewhere. The salt doesn't need to be private, everyone
 can see it. When the same salt and password is given to the key converter function, the same key is returned.
 
 ```kotlin
@@ -21,7 +21,7 @@ Files.newOutputStream(saltFile).use { stream ->
 
 // We can use that salt to generate a key from a password
 val password = "secret".toCharArray()
-val key = symmetric.createKeyFromPassword(password.toCharArray(), salt)
+val key = symmetric.createKeyFromPassword(password, salt)
 
 // And now we can use that key to encrypt something
 val plaintext = symmetric.createPlaintextFromString("Hello EasyKrypto")
