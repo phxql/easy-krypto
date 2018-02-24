@@ -13,9 +13,7 @@ val key = symmetric.keys.createRandom()
 
 // Save that key to a file
 val keyFile = Paths.get("/path/to/key")
-Files.newOutputStream(keyFile).use { stream ->
-    key.saveToStream(stream)
-}
+key.saveToFile(keyFile)
 
 // We can also load the key from the file again
 val loadedKey = Files.newInputStream(keyFile).use { stream ->
@@ -30,9 +28,7 @@ val ciphertext = symmetric.encrypt(plaintext, key)
 
 // We can now store the ciphertext to a file and no one without the key can read it
 val ciphertextFile = Paths.get("/path/to/ciphertext")
-Files.newOutputStream(ciphertextFile).use { stream ->
-    ciphertext.saveToStream(stream)
-}
+ciphertext.saveToFile(ciphertextFile)
 
 // We can load the ciphertext from the file again
 val loadedCiphertext = Files.newInputStream(ciphertextFile).use { stream ->

@@ -2,6 +2,8 @@ package de.mkammerer.easykrypto.symmetric
 
 import java.io.InputStream
 import java.io.OutputStream
+import java.nio.file.Files
+import java.nio.file.Path
 import java.util.*
 
 interface Writable {
@@ -25,5 +27,14 @@ interface Writable {
      */
     fun saveToStream(stream: OutputStream) {
         asStream().copyTo(stream)
+    }
+
+    /**
+     * Saves the contents of this object to a [file].
+     */
+    fun saveToFile(file: Path) {
+        Files.newOutputStream(file).use {
+            saveToStream(it)
+        }
     }
 }

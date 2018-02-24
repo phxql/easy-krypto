@@ -15,9 +15,7 @@ val salt = symmetric.salts.createRandom()
 
 // And store that salt in a file
 val saltFile = Paths.get("/path/to/salt")
-Files.newOutputStream(saltFile).use { stream ->
-    salt.saveToStream(stream)
-}
+salt.saveToFile(saltFile)
 
 // We can use that salt to generate a key from a password
 val password = "secret".toCharArray()

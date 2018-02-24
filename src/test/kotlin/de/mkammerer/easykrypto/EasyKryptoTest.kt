@@ -81,9 +81,7 @@ class EasyKryptoTest {
 
         // When we store that salt in a file
         val saltFile = createTempFile()
-        Files.newOutputStream(saltFile).use { stream ->
-            salt.saveToStream(stream)
-        }
+        salt.saveToFile(saltFile)
 
         // And load it
         val loadedSalt = Files.newInputStream(saltFile).use { stream ->
@@ -102,9 +100,7 @@ class EasyKryptoTest {
 
         // We store the key in a file
         val keyFile = createTempFile()
-        Files.newOutputStream(keyFile).use { stream ->
-            key.saveToStream(stream)
-        }
+        key.saveToFile(keyFile)
 
         // And we load the key from the file
         val loadedKey = Files.newInputStream(keyFile).use { stream ->
@@ -120,9 +116,7 @@ class EasyKryptoTest {
 
         // We store the ciphertext in a file
         val ciphertextFile = createTempFile()
-        Files.newOutputStream(ciphertextFile).use { stream ->
-            ciphertext.saveToStream(stream)
-        }
+        ciphertext.saveToFile(ciphertextFile)
 
         // And we load the ciphertext from the file
         val loadedCiphertext = Files.newInputStream(ciphertextFile).use { stream ->
