@@ -1,6 +1,7 @@
 package de.mkammerer.easykrypto
 
 import java.nio.file.Files
+import java.nio.file.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -27,7 +28,7 @@ class EasyKryptoTest {
         val key = symmetric.createKey()
 
         // We store the key in a file
-        val file = Files.createTempFile("easy-krypto", ".tmp")
+        val file = createTempFile()
         Files.newOutputStream(file).use { stream ->
             key.saveToStream(stream)
         }
@@ -52,7 +53,7 @@ class EasyKryptoTest {
         val ciphertext = symmetric.encrypt(plaintext, key)
 
         // We store the ciphertext in a file
-        val file = Files.createTempFile("easy-krypto", ".tmp")
+        val file = createTempFile()
         Files.newOutputStream(file).use { stream ->
             ciphertext.saveToStream(stream)
         }
@@ -67,5 +68,12 @@ class EasyKryptoTest {
 
         // The decrypted string must be the same as the plaintext
         assertEquals(plaintext.asString(), decrypted.asString())
+    }
+
+    private fun createTempFile(): Path {
+        return Files.createTempFile("easy-krypto", ".tmp").apply {
+            // Delete the file on end of the test runs
+            toFile().deleteOnExit()
+        }
     }
 }
