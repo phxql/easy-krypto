@@ -46,6 +46,8 @@ val decrypted = symmetric.decrypt(loadedCiphertext, loadedKey)
 println(decrypted.asString())
 ```
 
+For more examples, [see the How-To document](doc/howto.md).
+
 ## License
 
 Licensed under [LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.en.html).

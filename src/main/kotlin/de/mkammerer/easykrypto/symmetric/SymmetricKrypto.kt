@@ -12,6 +12,16 @@ interface SymmetricKrypto {
     fun createRandomKey(lengthInBits: Int = -1): Key
 
     /**
+     * Creates a randomly generated salt.
+     */
+    fun createRandomSalt(): Salt
+
+    /**
+     * Creates a key from the given [password] and the given [salt], optionally with the given [length in bits][lengthInBits].
+     */
+    fun createKeyFromPassword(password: CharArray, salt: Salt, lengthInBits: Int = -1): Key
+
+    /**
      * Creates a plaintext from the given [byte array][plaintext].
      */
     fun createPlaintextFromBytes(plaintext: ByteArray): Plaintext
@@ -20,6 +30,11 @@ interface SymmetricKrypto {
      * Creates a plaintext from the given [string][plaintext].
      */
     fun createPlaintextFromString(plaintext: String): Plaintext
+
+    /**
+     * Loads a salt from the given [stream].
+     */
+    fun loadSaltFromStream(stream: InputStream): Salt
 
     /**
      * Loads a key from the given [stream].

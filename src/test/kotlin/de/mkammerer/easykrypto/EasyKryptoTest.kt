@@ -4,6 +4,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class EasyKryptoTest {
     @Test
@@ -34,6 +35,63 @@ class EasyKryptoTest {
 
         // The decrypted string must be the same as the plaintext
         assertEquals(plaintext.asString(), decrypted.asString())
+    }
+
+    @Test
+    fun `encrypt and decrypt with password`() {
+        // Given a symmetric encryption with a key from a password
+        val symmetric = EasyKrypto.symmetric()
+        val salt = symmetric.createRandomSalt()
+        val key = symmetric.createKeyFromPassword("secret".toCharArray(), salt)
+
+        // When we encrypt and decrypt a string
+        val plaintext = symmetric.createPlaintextFromString("Hello EasyKrypto")
+        val ciphertext = symmetric.encrypt(plaintext, key)
+        val decrypted = symmetric.decrypt(ciphertext, key)
+
+        // The decrypted string must be the same as the plaintext
+        assertEquals(plaintext.asString(), decrypted.asString())
+    }
+
+    @Test
+    fun `key derivation is deterministic`() {
+        // Given a symmetric encryption and a random salt
+        val symmetric = EasyKrypto.symmetric()
+        val salt = symmetric.createRandomSalt()
+
+        // When we create two keys from the same password
+        val key1 = symmetric.createKeyFromPassword("secret".toCharArray(), salt)
+        val key2 = symmetric.createKeyFromPassword("secret".toCharArray(), salt)
+
+        // And one from another password
+        val key3 = symmetric.createKeyFromPassword("foobar".toCharArray(), salt)
+
+        // The keys from the same passwords must be equal
+        assertEquals(key1, key2)
+
+        // But the key from the other password must not be equal
+        assertNotEquals(key3, key1)
+    }
+
+    @Test
+    fun `save and load salt`() {
+        // Given a symmetric encryption and a random salt
+        val symmetric = EasyKrypto.symmetric()
+        val salt = symmetric.createRandomSalt()
+
+        // When we store that salt in a file
+        val saltFile = createTempFile()
+        Files.newOutputStream(saltFile).use { stream ->
+            salt.saveToStream(stream)
+        }
+
+        // And load it
+        val loadedSalt = Files.newInputStream(saltFile).use { stream ->
+            symmetric.loadSaltFromStream(stream)
+        }
+
+        // They must be the same
+        assertEquals(salt, loadedSalt)
     }
 
     @Test
