@@ -2,10 +2,6 @@
 
 This Kotlin library aims to provide a simple way to encrypt and decrypt stuff in a secure manner.
 
-## Building
-
-Run `./mvnw clean package` and check the `target` folder.
-
 ## Usage
 
 ```kotlin
@@ -53,3 +49,7 @@ println(decrypted.asString())
 ## License
 
 Licensed under [LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.en.html).
+
+## Developer guide
+
+See [the developer guide](doc/development.md).
