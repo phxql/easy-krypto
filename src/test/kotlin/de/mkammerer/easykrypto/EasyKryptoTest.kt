@@ -37,49 +37,42 @@ class EasyKryptoTest {
     }
 
     @Test
-    fun `save and load key`() {
+    fun `save and load key and ciphertext`() {
         // Given a symmetric encryption with a random key
         val symmetric = EasyKrypto.symmetric()
         val key = symmetric.createRandomKey()
 
         // We store the key in a file
-        val file = createTempFile()
-        Files.newOutputStream(file).use { stream ->
+        val keyFile = createTempFile()
+        Files.newOutputStream(keyFile).use { stream ->
             key.saveToStream(stream)
         }
 
         // And we load the key from the file
-        val loadedKey = Files.newInputStream(file).use { stream ->
+        val loadedKey = Files.newInputStream(keyFile).use { stream ->
             symmetric.loadKeyFromStream(stream)
         }
 
         // Then both keys must be the same
         assertEquals(key, loadedKey)
-    }
 
-    @Test
-    fun `save and load ciphertext`() {
-        // Given a symmetric encryption with a random key
-        val symmetric = EasyKrypto.symmetric()
-        val key = symmetric.createRandomKey()
-
-        // We first create some ciphertext
+        // We first create some ciphertext with the original key
         val plaintext = symmetric.createPlaintextFromString("Hello EasyKrypto")
         val ciphertext = symmetric.encrypt(plaintext, key)
 
         // We store the ciphertext in a file
-        val file = createTempFile()
-        Files.newOutputStream(file).use { stream ->
+        val ciphertextFile = createTempFile()
+        Files.newOutputStream(ciphertextFile).use { stream ->
             ciphertext.saveToStream(stream)
         }
 
         // And we load the ciphertext from the file
-        val loadedCiphertext = Files.newInputStream(file).use { stream ->
+        val loadedCiphertext = Files.newInputStream(ciphertextFile).use { stream ->
             symmetric.loadCiphertextFromStream(stream)
         }
 
-        // When we decrypt the ciphertext
-        val decrypted = symmetric.decrypt(loadedCiphertext, key)
+        // When we decrypt the ciphertext with the loaded key
+        val decrypted = symmetric.decrypt(loadedCiphertext, loadedKey)
 
         // The decrypted string must be the same as the plaintext
         assertEquals(plaintext.asString(), decrypted.asString())
