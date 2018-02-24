@@ -6,6 +6,9 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.*
 
+/**
+ * Stuff that is writable.
+ */
 interface Writable {
     /**
      * Returns the contents of this object as a stream.
@@ -33,8 +36,8 @@ interface Writable {
      * Saves the contents of this object to a [file].
      */
     fun saveToFile(file: Path) {
-        Files.newOutputStream(file).use {
-            saveToStream(it)
+        Files.newOutputStream(file).use { stream ->
+            saveToStream(stream)
         }
     }
 }

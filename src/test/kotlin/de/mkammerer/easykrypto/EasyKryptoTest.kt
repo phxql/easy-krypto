@@ -1,5 +1,6 @@
 package de.mkammerer.easykrypto
 
+import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.test.Test
@@ -7,6 +8,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
 class EasyKryptoTest {
+    private val logger = LoggerFactory.getLogger(javaClass)
+
     @Test
     fun `encrypt and decrypt`() {
         // Given a symmetric encryption with a random key
@@ -17,6 +20,32 @@ class EasyKryptoTest {
         val plaintext = symmetric.plaintexts.createFromString("Hello EasyKrypto")
         val ciphertext = symmetric.encrypt(plaintext, key)
         val decrypted = symmetric.decrypt(ciphertext, key)
+
+        // The decrypted string must be the same as the plaintext
+        assertEquals(plaintext.asString(), decrypted.asString())
+    }
+
+    @Test
+    fun `encrypt and decrypt with string serialization`() {
+        // Given a symmetric encryption with a random key
+        val symmetric = EasyKrypto.symmetric()
+        val key = symmetric.keys.createRandom()
+
+        // Serialize the key to string and back
+        val serializedKey = key.asString()
+        logger.debug("Serialized key: {}", serializedKey)
+        val loadedKey = symmetric.keys.createFromString(serializedKey)
+
+        // When we encrypt and decrypt a string
+        val plaintext = symmetric.plaintexts.createFromString("Hello EasyKrypto")
+        val ciphertext = symmetric.encrypt(plaintext, key)
+
+        // Serialize the ciphertext to string and back
+        val serializedCiphertext = ciphertext.asString()
+        logger.debug("Serialized ciphertext: {}", serializedCiphertext)
+        val loadedCiphertext = symmetric.ciphertexts.createFromString(serializedCiphertext)
+
+        val decrypted = symmetric.decrypt(loadedCiphertext, loadedKey)
 
         // The decrypted string must be the same as the plaintext
         assertEquals(plaintext.asString(), decrypted.asString())
@@ -84,9 +113,23 @@ class EasyKryptoTest {
         salt.saveToFile(saltFile)
 
         // And load it
-        val loadedSalt = Files.newInputStream(saltFile).use { stream ->
-            symmetric.salts.loadFromStream(stream)
-        }
+        val loadedSalt = symmetric.salts.loadFromFile(saltFile)
+
+        // They must be the same
+        assertEquals(salt, loadedSalt)
+    }
+
+    @Test
+    fun `serialize and deserialize salt`() {
+        // Given a symmetric encryption and a random salt
+        val symmetric = EasyKrypto.symmetric()
+        val salt = symmetric.salts.createRandom()
+
+        val serializedSalt = salt.asString()
+        logger.info("Serialized salt: {}", serializedSalt)
+
+        // And load it
+        val loadedSalt = symmetric.salts.createFromString(serializedSalt)
 
         // They must be the same
         assertEquals(salt, loadedSalt)
@@ -103,9 +146,7 @@ class EasyKryptoTest {
         key.saveToFile(keyFile)
 
         // And we load the key from the file
-        val loadedKey = Files.newInputStream(keyFile).use { stream ->
-            symmetric.keys.loadFromStream(stream)
-        }
+        val loadedKey = symmetric.keys.loadFromFile(keyFile)
 
         // Then both keys must be the same
         assertEquals(key, loadedKey)
@@ -119,9 +160,7 @@ class EasyKryptoTest {
         ciphertext.saveToFile(ciphertextFile)
 
         // And we load the ciphertext from the file
-        val loadedCiphertext = Files.newInputStream(ciphertextFile).use { stream ->
-            symmetric.ciphertexts.loadFromStream(stream)
-        }
+        val loadedCiphertext = symmetric.ciphertexts.loadFromFile(ciphertextFile)
 
         // When we decrypt the ciphertext with the loaded key
         val decrypted = symmetric.decrypt(loadedCiphertext, loadedKey)

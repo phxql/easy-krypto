@@ -16,9 +16,7 @@ val keyFile = Paths.get("/path/to/key")
 key.saveToFile(keyFile)
 
 // We can also load the key from the file again
-val loadedKey = Files.newInputStream(keyFile).use { stream ->
-    symmetric.keys.loadFromStream(stream)
-}
+val loadedKey = symmetric.keys.loadFromFile(keyFile)
 
 // We create a plaintext from a string we want to encrypt
 val plaintext = symmetric.plaintexts.createFromString("Hello EasyKrypto")
@@ -31,9 +29,7 @@ val ciphertextFile = Paths.get("/path/to/ciphertext")
 ciphertext.saveToFile(ciphertextFile)
 
 // We can load the ciphertext from the file again
-val loadedCiphertext = Files.newInputStream(ciphertextFile).use { stream ->
-    symmetric.ciphertexts.loadFromStream(stream)
-}
+val loadedCiphertext = symmetric.ciphertexts.loadFromFile(ciphertextFile)
 
 // And use the key to decrypt the ciphertext to the plaintext
 val decrypted = symmetric.decrypt(loadedCiphertext, loadedKey)
