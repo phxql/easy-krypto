@@ -6,7 +6,7 @@ import de.mkammerer.easykrypto.symmetric.Ciphertexts
 import java.io.InputStream
 
 class AesCiphertexts(private val nonceLengthInBits: Int) : Ciphertexts {
-    override fun loadCiphertextFromStream(stream: InputStream): Ciphertext {
+    override fun loadFromStream(stream: InputStream): Ciphertext {
         val nonce = stream.readNBytes(nonceLengthInBits / 8)
         val cipherBytes = stream.readBytes()
 

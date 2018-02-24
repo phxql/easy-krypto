@@ -15,14 +15,14 @@ object KeysImpl : Keys {
 
     private val secureRandom = SecureRandom()
 
-    override fun createRandomKey(lengthInBits: Int): Key {
+    override fun createRandom(lengthInBits: Int): Key {
         val length = if (lengthInBits == -1) DEFAULT_KEY_SIZE_IN_BITS else lengthInBits
 
         val bytes = secureRandom.nextBytes(length / 8)
         return KeyImpl(bytes)
     }
 
-    override fun createKeyFromPassword(password: CharArray, salt: Salt, lengthInBits: Int): Key {
+    override fun createFromPassword(password: CharArray, salt: Salt, lengthInBits: Int): Key {
         val length = if (lengthInBits == -1) DEFAULT_KEY_SIZE_IN_BITS else lengthInBits
 
         val spec = PBEKeySpec(password, salt.asBytes(), PBE_ITERATION_COUNT, length)
@@ -32,7 +32,7 @@ object KeysImpl : Keys {
         return KeyImpl(keyBytes)
     }
 
-    override fun loadKeyFromStream(stream: InputStream): Key {
+    override fun loadFromStream(stream: InputStream): Key {
         val bytes = stream.readBytes()
         return KeyImpl(bytes)
     }

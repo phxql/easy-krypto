@@ -4,7 +4,7 @@ import de.mkammerer.easykrypto.symmetric.Plaintext
 import de.mkammerer.easykrypto.symmetric.Plaintexts
 
 object PlaintextsImpl : Plaintexts {
-    override fun createPlaintextFromBytes(plaintext: ByteArray): Plaintext = BytesPlaintext(plaintext)
+    override fun createFromBytes(plaintext: ByteArray): Plaintext = BytesPlaintext(plaintext)
 
-    override fun createPlaintextFromString(plaintext: String): Plaintext = BytesPlaintext(plaintext.toByteArray())
+    override fun createFromString(plaintext: String): Plaintext = BytesPlaintext(plaintext.toByteArray())
 }

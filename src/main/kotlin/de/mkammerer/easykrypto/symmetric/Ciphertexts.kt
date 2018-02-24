@@ -9,5 +9,5 @@ interface Ciphertexts {
     /**
      * Loads a ciphertext from the given [stream].
      */
-    fun loadCiphertextFromStream(stream: InputStream): Ciphertext
+    fun loadFromStream(stream: InputStream): Ciphertext
 }

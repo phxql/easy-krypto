@@ -9,7 +9,7 @@ This Kotlin library aims to provide a simple way to encrypt and decrypt stuff in
 val symmetric = EasyKrypto.symmetric()
 
 // Generate a random key
-val key = symmetric.keys.createRandomKey()
+val key = symmetric.keys.createRandom()
 
 // Save that key to a file
 val keyFile = Paths.get("/path/to/key")
@@ -19,11 +19,11 @@ Files.newOutputStream(keyFile).use { stream ->
 
 // We can also load the key from the file again
 val loadedKey = Files.newInputStream(keyFile).use { stream ->
-    symmetric.keys.loadKeyFromStream(stream)
+    symmetric.keys.loadFromStream(stream)
 }
 
 // We create a plaintext from a string we want to encrypt
-val plaintext = symmetric.plaintexts.createPlaintextFromString("Hello EasyKrypto")
+val plaintext = symmetric.plaintexts.createFromString("Hello EasyKrypto")
 
 // And then we encrypt that plaintext with the key to the ciphertext
 val ciphertext = symmetric.encrypt(plaintext, key)
@@ -36,7 +36,7 @@ Files.newOutputStream(ciphertextFile).use { stream ->
 
 // We can load the ciphertext from the file again
 val loadedCiphertext = Files.newInputStream(ciphertextFile).use { stream ->
-    symmetric.ciphertexts.loadCiphertextFromStream(stream)
+    symmetric.ciphertexts.loadFromStream(stream)
 }
 
 // And use the key to decrypt the ciphertext to the plaintext

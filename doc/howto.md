@@ -11,7 +11,7 @@ can see it. When the same salt and password is given to the key converter functi
 val symmetric = EasyKrypto.symmetric()
 
 // Generate random salt
-val salt = symmetric.salts.createRandomSalt()
+val salt = symmetric.salts.createRandom()
 
 // And store that salt in a file
 val saltFile = Paths.get("/path/to/salt")
@@ -21,12 +21,12 @@ Files.newOutputStream(saltFile).use { stream ->
 
 // We can use that salt to generate a key from a password
 val password = "secret".toCharArray()
-val key = symmetric.keys.createKeyFromPassword(password, salt)
+val key = symmetric.keys.createFromPassword(password, salt)
 
 // And now we can use that key to encrypt something
-val plaintext = symmetric.plaintexts.createPlaintextFromString("Hello EasyKrypto")
+val plaintext = symmetric.plaintexts.createFromString("Hello EasyKrypto")
 val ciphertext = symmetric.encrypt(plaintext, key)
 ```
 
-Decryption is the other way around: load the salt from the file and use the same password in the `createKeyFromPassword`
+Decryption is the other way around: load the salt from the file and use the same password in the `createFromPassword`
 method to get the decryption key.

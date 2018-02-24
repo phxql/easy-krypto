@@ -9,10 +9,10 @@ interface Salts {
     /**
      * Creates a randomly generated salt.
      */
-    fun createRandomSalt(): Salt
+    fun createRandom(): Salt
 
     /**
      * Loads a salt from the given [stream].
      */
-    fun loadSaltFromStream(stream: InputStream): Salt
+    fun loadFromStream(stream: InputStream): Salt
 }

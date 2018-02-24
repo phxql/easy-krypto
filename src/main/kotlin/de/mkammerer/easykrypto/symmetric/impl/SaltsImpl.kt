@@ -11,12 +11,12 @@ object SaltsImpl : Salts {
 
     private val secureRandom = SecureRandom()
 
-    override fun createRandomSalt(): Salt {
+    override fun createRandom(): Salt {
         val bytes = secureRandom.nextBytes(DEFAULT_SALT_SIZE_IN_BITS / 8)
         return SaltImpl(bytes)
     }
 
-    override fun loadSaltFromStream(stream: InputStream): Salt {
+    override fun loadFromStream(stream: InputStream): Salt {
         val bytes = stream.readBytes()
         return SaltImpl(bytes)
     }

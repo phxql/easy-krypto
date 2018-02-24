@@ -7,10 +7,10 @@ interface Plaintexts {
     /**
      * Creates a plaintext from the given [byte array][plaintext].
      */
-    fun createPlaintextFromBytes(plaintext: ByteArray): Plaintext
+    fun createFromBytes(plaintext: ByteArray): Plaintext
 
     /**
      * Creates a plaintext from the given [string][plaintext].
      */
-    fun createPlaintextFromString(plaintext: String): Plaintext
+    fun createFromString(plaintext: String): Plaintext
 }

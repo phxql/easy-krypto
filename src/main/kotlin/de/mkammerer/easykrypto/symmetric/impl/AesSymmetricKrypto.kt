@@ -48,6 +48,6 @@ object AesSymmetricKrypto : SymmetricKrypto {
         cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmSpec)
 
         val plaintextBytes = cipher.doFinal(ciphertext.ciphertext)
-        return plaintexts.createPlaintextFromBytes(plaintextBytes)
+        return plaintexts.createFromBytes(plaintextBytes)
     }
 }
