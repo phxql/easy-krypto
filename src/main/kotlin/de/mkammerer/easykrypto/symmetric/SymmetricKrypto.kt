@@ -1,50 +1,28 @@
 package de.mkammerer.easykrypto.symmetric
 
-import java.io.InputStream
-
 /**
  * Symmetric crypto.
  */
 interface SymmetricKrypto {
     /**
-     * Creates a randomly generated key, optionally with the given [length in bits][lengthInBits].
+     * Key methods.
      */
-    fun createRandomKey(lengthInBits: Int = -1): Key
+    val keys: Keys
 
     /**
-     * Creates a randomly generated salt.
+     * Plaintext methods.
      */
-    fun createRandomSalt(): Salt
+    val plaintexts: Plaintexts
 
     /**
-     * Creates a key from the given [password] and the given [salt], optionally with the given [length in bits][lengthInBits].
+     * Salt methods.
      */
-    fun createKeyFromPassword(password: CharArray, salt: Salt, lengthInBits: Int = -1): Key
+    val salts: Salts
 
     /**
-     * Creates a plaintext from the given [byte array][plaintext].
+     * Ciphertext methods.
      */
-    fun createPlaintextFromBytes(plaintext: ByteArray): Plaintext
-
-    /**
-     * Creates a plaintext from the given [string][plaintext].
-     */
-    fun createPlaintextFromString(plaintext: String): Plaintext
-
-    /**
-     * Loads a salt from the given [stream].
-     */
-    fun loadSaltFromStream(stream: InputStream): Salt
-
-    /**
-     * Loads a key from the given [stream].
-     */
-    fun loadKeyFromStream(stream: InputStream): Key
-
-    /**
-     * Loads a ciphertext from the given [stream].
-     */
-    fun loadCiphertextFromStream(stream: InputStream): Ciphertext
+    val ciphertexts: Ciphertexts
 
     /**
      * Encrypts the given [plaintext] with the given [key] and returns the ciphertext.
