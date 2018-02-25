@@ -3,7 +3,7 @@ package de.mkammerer.easykrypto.symmetric
 /**
  * Methods for keys.
  */
-interface Keys : Readable<Key> {
+interface Keys : Reader<Key> {
     /**
      * Creates a randomly generated key, optionally with the given [length in bits][lengthInBits].
      */

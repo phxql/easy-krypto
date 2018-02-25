@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Stuff that is readable.
  */
-interface Readable<out T> {
+interface Reader<out T> {
     /**
      * Loads a new object from the given [stream].
      */

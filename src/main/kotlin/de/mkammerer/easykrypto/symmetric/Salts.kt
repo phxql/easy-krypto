@@ -3,7 +3,7 @@ package de.mkammerer.easykrypto.symmetric
 /**
  * Methods for salts.
  */
-interface Salts : Readable<Salt> {
+interface Salts : Reader<Salt> {
     /**
      * Creates a randomly generated salt.
      */
