@@ -1,4 +1,5 @@
-# Easy Krypto [![Build Status](https://travis-ci.org/phxql/easy-krypto.svg?branch=master)](https://travis-ci.org/phxql/easy-krypto)
+# Easy Krypto [![Build Status](https://travis-ci.org/phxql/easy-krypto.svg?branch=master)](https://travis-ci.org/phxql/easy-krypto) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.mkammerer.easy-krypto/easy-krypto/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.mkammerer.easy-krypto/easy-krypto)
+
 
 This Kotlin library aims to provide a simple way to encrypt and decrypt stuff in a secure manner.
 
