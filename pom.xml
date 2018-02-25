@@ -45,8 +45,6 @@
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.2.21</kotlin.version>
-        <license.licenseName>lgpl-v3</license.licenseName>
-        <license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
     </properties>
 
     <dependencyManagement>
@@ -146,6 +144,9 @@
                             <phase>process-sources</phase>
                         </execution>
                     </executions>
+                    <configuration>
+                        <licenseName>lgpl_v3</licenseName>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
