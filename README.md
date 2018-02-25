@@ -2,6 +2,8 @@
 
 This Kotlin library aims to provide a simple way to encrypt and decrypt stuff in a secure manner.
 
+Using Java, Scala, Groovy, etc.? No problem, this library can also be used with any JVM language. See [Java interop](doc/java-interop.md) for details.
+
 ## Usage
 
 ```kotlin

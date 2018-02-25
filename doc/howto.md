@@ -1,5 +1,9 @@
 # How-To
 
+## Use this library with Java (or Scala, or Groovy, or any other JVM language)
+
+See [Java interop](java-interop.md).
+
 ## Encrypt something with a password
 
 To encrypt or decrypt something with a password, the password needs to be converted to a key. To make that process secure,
