@@ -26,12 +26,22 @@ package de.mkammerer.easykrypto.symmetric
  */
 interface Keys : Reader<Key> {
     /**
-     * Creates a randomly generated key, optionally with the given [length in bits][lengthInBits].
+     * Creates a randomly generated key with the default key length.
      */
-    fun createRandom(lengthInBits: Int = -1): Key
+    fun createRandom(): Key
 
     /**
-     * Creates a key from the given [password] and the given [salt], optionally with the given [length in bits][lengthInBits].
+     * Creates a randomly generated key with the given [length in bits][lengthInBits].
      */
-    fun createFromPassword(password: CharArray, salt: Salt, lengthInBits: Int = -1): Key
+    fun createRandom(lengthInBits: Int): Key
+
+    /**
+     * Creates a key from the given [password] and the given [salt] with the default key length.
+     */
+    fun createFromPassword(password: CharArray, salt: Salt): Key
+
+    /**
+     * Creates a key from the given [password] and the given [salt] with the given [length in bits][lengthInBits].
+     */
+    fun createFromPassword(password: CharArray, salt: Salt, lengthInBits: Int): Key
 }

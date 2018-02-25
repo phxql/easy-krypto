@@ -36,17 +36,17 @@ object KeysImpl : Keys {
 
     private val secureRandom = SecureRandom()
 
-    override fun createRandom(lengthInBits: Int): Key {
-        val length = if (lengthInBits == -1) DEFAULT_KEY_SIZE_IN_BITS else lengthInBits
+    override fun createRandom(): Key = createRandom(DEFAULT_KEY_SIZE_IN_BITS)
 
-        val bytes = secureRandom.nextBytes(length / 8)
+    override fun createRandom(lengthInBits: Int): Key {
+        val bytes = secureRandom.nextBytes(lengthInBits / 8)
         return KeyImpl(bytes)
     }
 
-    override fun createFromPassword(password: CharArray, salt: Salt, lengthInBits: Int): Key {
-        val length = if (lengthInBits == -1) DEFAULT_KEY_SIZE_IN_BITS else lengthInBits
+    override fun createFromPassword(password: CharArray, salt: Salt): Key = createFromPassword(password, salt, DEFAULT_KEY_SIZE_IN_BITS)
 
-        val spec = PBEKeySpec(password, salt.asBytes(), PBE_ITERATION_COUNT, length)
+    override fun createFromPassword(password: CharArray, salt: Salt, lengthInBits: Int): Key {
+        val spec = PBEKeySpec(password, salt.asBytes(), PBE_ITERATION_COUNT, lengthInBits)
         val skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
         val keyBytes = skf.generateSecret(spec).encoded
 
