@@ -5,7 +5,7 @@ This Kotlin library aims to provide a simple way to encrypt and decrypt stuff in
 Using Java, Scala, Groovy, etc.? No problem, this library can also be used with any JVM language. See [Java interop](doc/java-interop.md) for details.
 
 ## Maven
-```
+```xml
 <dependency>
     <groupId>de.mkammerer.easy-krypto</groupId>
     <artifactId>easy-krypto</artifactId>
