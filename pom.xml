@@ -8,6 +8,33 @@
     <artifactId>easy-krypto</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <name>Easy Krypto</name>
+    <description>This Kotlin library aims to provide a simple way to encrypt and decrypt stuff in a secure manner.
+    </description>
+    <url>https://github.com/phxql/easy-krypto</url>
+
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License, Version 3</name>
+            <url>https://www.gnu.org/licenses/lgpl-3.0.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>phxql</id>
+            <name>Moritz Kammerer</name>
+            <email>kammerer.moritz@gmail.com</email>
+            <url>https://www.mkammerer.de/</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/phxql/easy-krypto.git</connection>
+        <developerConnection>scm:git:ssh://github.com:phxql/easy-krypto.git</developerConnection>
+        <url>http://github.com/phxql/easy-krypto/tree/master</url>
+    </scm>
+
     <properties>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
