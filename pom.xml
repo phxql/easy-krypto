@@ -13,6 +13,12 @@
     </description>
     <url>https://github.com/phxql/easy-krypto</url>
 
+    <inceptionYear>2018</inceptionYear>
+    <organization>
+        <name>Moritz Kammerer</name>
+        <url>https://www.mkammerer.de/</url>
+    </organization>
+
     <licenses>
         <license>
             <name>GNU Lesser General Public License, Version 3</name>
@@ -39,6 +45,8 @@
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.2.21</kotlin.version>
+        <license.licenseName>lgpl-v3</license.licenseName>
+        <license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
     </properties>
 
     <dependencyManagement>
@@ -121,6 +129,21 @@
                             <goals>
                                 <goal>test-compile</goal>
                             </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.14</version>
+                    <executions>
+                        <execution>
+                            <id>first</id>
+                            <goals>
+                                <goal>update-file-header</goal>
+                            </goals>
+                            <phase>process-sources</phase>
                         </execution>
                     </executions>
                 </plugin>
