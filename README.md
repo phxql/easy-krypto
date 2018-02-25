@@ -49,7 +49,7 @@ val decrypted = symmetric.decrypt(loadedCiphertext, loadedKey)
 println(decrypted.asString())
 ```
 
-For more examples, [see the How-To document](doc/howto.md).
+For more examples, [see the How-To guide](doc/howto.md).
 
 ## License
 
