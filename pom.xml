@@ -37,7 +37,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/phxql/easy-krypto.git</connection>
-        <developerConnection>scm:git:ssh://github.com:phxql/easy-krypto.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com:phxql/easy-krypto.git</developerConnection>
         <url>http://github.com/phxql/easy-krypto/tree/master</url>
     </scm>
 
